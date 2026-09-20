@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "legendrecorder",
+  "version": "${version}",
+  "name": "Legend Recorder",
+  "description": "تسجيل فيديو + شاشة + صوت من داخل اللعبة — واجهة مثل Simple Voice Chat مع تحكم بالصوت وازالة تشويش حقيقية وضبط جودة بدون لاق.",
+  "authors": ["Legend"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.legend.recorder.LegendRecorderMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "~1.21.1",
+    "java": ">=21"
+  },
+  "suggests": {
+    "voicechat": "تكامل اختياري مع Simple Voice Chat لتسجيل اصوات اللاعبين"
+  },
+  "custom": {
+    "legendrecorder:antiLag": true
+  }
+}

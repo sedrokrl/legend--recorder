@@ -1,0 +1,46 @@
+plugins {
+    id 'fabric-loom' version '1.10.4'
+    id 'java'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base { archivesName = project.archives_base_name }
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+}
+
+loom {
+    splitEnvironmentSourceSets()
+    mods {
+        "legendrecorder" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    // ملاحظة: التكامل مع Simple Voice Chat يتم عبر Reflection فقط (VoiceChatHook)
+    // لذلك لا توجد dependency إجبارية — المود يعمل معه وبدونه.
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") { expand "version": project.version }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    it.options.encoding = "UTF-8"
+}
+
+jar {
+    from("LICENSE") { into("") }
+}
